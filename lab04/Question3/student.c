@@ -55,7 +55,17 @@ struct TreeNode {
     struct TreeNode *right;
 };
 
+int calculatePathSum(struct TreeNode* node, int currentSum) {
+    if(node == NULL){return 0;}
+
+    currentSum = (currentSum * 10) + node->val;
+
+    if(node->left == NULL && node->right == NULL){return currentSum;}
+
+    return calculatePathSum(node->left, currentSum) + 
+           calculatePathSum(node->right, currentSum);
+}
 
 int sumNumbers(struct TreeNode* root) {
-      // TODO: implement
+    return calculatePathSum(root, 0);
 }
